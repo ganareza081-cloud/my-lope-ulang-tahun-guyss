@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🖤</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    background:#090909;
+    font-family:'Poppins',sans-serif;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* 🌌 BACKGROUND STAR */
+.star{
+    position:fixed;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    opacity:0.5;
+}
+
+/* 💘 FALLING HEART */
+.heart{
+    position:fixed;
+    color:#ff2e63;
+    animation: fall linear infinite;
+}
+@keyframes fall{
+    0%{transform:translateY(-10vh); opacity:0;}
+    20%{opacity:1;}
+    100%{transform:translateY(110vh); opacity:0;}
+}
+
+/* 💌 OPENING */
+.opening{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:#090909;
+    z-index:999;
+    animation:fadeIn 2s;
+}
+.envelope{
+    font-size:90px;
+    cursor:pointer;
+    transition:0.5s;
+    text-shadow:0 0 20px #ff2e63;
+}
+.envelope:hover{
+    transform:scale(1.2);
+}
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* MAIN */
+.main{
+    display:none;
+    text-align:center;
+    padding:40px 20px;
+    animation:fadeIn 2s;
+}
+
+h1{
+    font-family:'Playfair Display',serif;
+    font-size:42px;
+    letter-spacing:2px;
+}
+
+/* FOTO UTAMA CINEMATIC */
+.photo-main{
+    width:260px;
+    height:260px;
+    margin:30px auto;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 0 40px #ff2e63;
+}
+.photo-main img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    animation:slowZoom 15s infinite alternate;
+}
+@keyframes slowZoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+
+/* GALERI */
+.gallery{
+    display:flex;
+    overflow-x:auto;
+    gap:15px;
+    padding:20px;
+    scroll-behavior:smooth;
+}
+.gallery img{
+    width:160px;
+    height:220px;
+    border-radius:15px;
+    object-fit:cover;
+    transition:0.4s;
+}
+.gallery img:hover{
+    transform:scale(1.1);
+}
+
+/* BUTTON */
+button{
+    margin-top:20px;
+    padding:12px 28px;
+    border:1px solid #ff2e63;
+    background:transparent;
+    color:#ff2e63;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover{
+    background:#ff2e63;
+    color:white;
+    box-shadow:0 0 20px #ff2e63;
+}
+
+/* SURAT */
+.letter{
+    max-width:600px;
+    margin:30px auto;
+    display:none;
+    opacity:0;
+    transition:1s;
+    line-height:1.8;
+    color:#ccc;
+}
+.letter.show{
+    display:block;
+    opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💌 OPENING -->
+<div class="opening" id="opening">
+    <div class="envelope" onclick="openSite()">💌</div>
+    <p>Klik amplopnya yaa 🖤</p>
+</div>
+
+<!-- 🌙 MAIN -->
+<div class="main" id="main">
+    <h1>Happy Birthday, My Love 🖤</h1>
+
+    <div class="photo-main">
+        <img src="foto.jpg">
+    </div>
+
+    <p>Semesta hari ini terasa lebih hangat karena kamu ada.</p>
+
+    <div class="gallery">
+        <img src="foto1.jpg">
+        <img src="foto2.jpg">
+        <img src="foto3.jpg">
+    </div>
+
+    <button onclick="showLetter()">Buka Surat 🤍</button>
+
+    <div class="letter" id="letter">
+        Kamu adalah rumah yang tidak pernah ingin aku tinggalkan.  
+
+        Di dunia yang seringkali bising,  
+        kamu adalah tenang yang selalu aku rindukan.  
+
+        Terima kasih sudah lahir.  
+        Terima kasih sudah hadir.  
+        Dan terima kasih sudah memilih aku sejauh ini.  
+
+        Kalau nanti hidup terasa berat,  
+        genggam tanganku.  
+        Aku nggak akan kemana-mana. 🖤
+    </div>
+</div>
+
+<audio autoplay loop>
+<source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openSite(){
+    document.getElementById("opening").style.display="none";
+    document.getElementById("main").style.display="block";
+}
+
+function showLetter(){
+    const letter=document.getElementById("letter");
+    letter.classList.add("show");
+}
+
+/* 🌌 STARS */
+for(let i=0;i<100;i++){
+    const star=document.createElement("div");
+    star.classList.add("star");
+    star.style.left=Math.random()*100+"vw";
+    star.style.top=Math.random()*100+"vh";
+    document.body.appendChild(star);
+}
+
+/* 💘 HEART RAIN */
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+    heart.style.animationDuration=(Math.random()*3+3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,500);
+</script>
+
+</body>
+</html>
